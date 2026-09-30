@@ -1,0 +1,38 @@
+/*
+ * vite-package-ui — single CSS entry.
+ *
+ * Consumer usage (main.jsx hoặc CSS gốc):
+ *   import 'vite-package-ui/styles';
+ *
+ * Yêu cầu consumer đã cấu hình:
+ *   - Tailwind v4 native plugin (@tailwindcss/vite) hoặc PostCSS plugin
+ *   - React 18+/19
+ *
+ * @source giúp Tailwind v4 quét class names trong node_modules/vite-package-ui —
+ * nếu không có, các class như `btn`, `card`, `form-input` từ package
+ * sẽ không được emit trong bundle của consumer.
+ */
+
+@import "tailwindcss";
+
+@source "../components/**/*.{js,jsx,ts,tsx}";
+
+@import "./themes.css";
+
+@plugin "@tailwindcss/typography";
+/*
+ * KHÔNG dùng @tailwindcss/forms — plugin reset/inject styles trên tất cả
+ * native form elements ở @layer base + có specificity cao qua attribute
+ * selectors (input[type="email"], ...) → override .form-input của mình.
+ * Package tự style form-input trong _forms.css → không cần plugin.
+ */
+
+@import "./_reboot.css";
+@import "./_helper.css";
+@import "./_buttons.css";
+@import "./_card.css";
+@import "./_dropdown.css";
+@import "./_forms.css";
+@import "./_modal.css";
+@import "./_badge.css";
+@import "./_alert.css";

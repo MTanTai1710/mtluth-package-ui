@@ -1,0 +1,79 @@
+@layer components {
+  .m-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: color-mix(in oklab, var(--color-default-950) 50%, transparent);
+    backdrop-filter: blur(4px);
+  }
+
+  .m-modal-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 32rem; /* max-w-lg */
+    max-height: 90vh;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-default-200);
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  .m-modal-panel.size-sm { max-width: 24rem; }
+  .m-modal-panel.size-md { max-width: 32rem; }
+  .m-modal-panel.size-lg { max-width: 42rem; }
+  .m-modal-panel.size-xl { max-width: 56rem; }
+
+  .m-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-default-200);
+  }
+
+  .m-modal-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-default-800);
+    margin: 0;
+  }
+
+  .m-modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    color: var(--color-default-500);
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: background-color 120ms, color 120ms;
+  }
+
+  .m-modal-close:hover {
+    background-color: var(--color-default-100);
+    color: var(--color-default-800);
+  }
+
+  .m-modal-body {
+    padding: 1.25rem;
+    overflow-y: auto;
+  }
+
+  .m-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--color-default-200);
+  }
+}

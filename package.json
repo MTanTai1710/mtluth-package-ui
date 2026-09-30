@@ -1,0 +1,43 @@
+{
+  "name": "vite-package-ui",
+  "version": "0.1.0",
+  "description": "Atomic React UI package (MButton, MCard, MDropdown, ...) — Tailwind v4 + Tailwick tokens. Ship source, consumer Vite transpiles.",
+  "type": "module",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./styles": "./src/styles/index.css",
+    "./styles/*": "./src/styles/*"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": { "optional": false }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.13",
+    "@vitejs/plugin-react": "^5.0.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.13",
+    "vite": "^7.1.7"
+  },
+  "keywords": ["react", "ui", "tailwind", "tailwind-v4", "vite", "components"],
+  "license": "MIT"
+}

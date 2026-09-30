@@ -1,0 +1,187 @@
+/*
+ * Form controls — border/bg/radius viết CSS trực tiếp (không @apply)
+ * để không phụ thuộc Tailwind resolve token đúng lúc compile.
+ * @apply chỉ dùng cho variant (focus, disabled, aria-invalid) và utility gộp.
+ */
+
+@layer components {
+  .form-input {
+    display: block;
+    width: 100%;
+    height: 2.5rem; /* h-10 */
+    padding: 0 0.75rem; /* px-3 */
+    border-radius: 0.375rem; /* rounded-md */
+    border: 1px solid var(--color-default-300, #d4d4d8);
+    background-color: var(--color-card);
+    color: var(--color-default-800);
+    font-size: 0.875rem; /* text-sm */
+    outline: 0;
+    transition-property: color, box-shadow, border-color;
+    transition-duration: 150ms;
+  }
+
+  .form-input::placeholder {
+    color: var(--color-default-400);
+  }
+
+  .form-input:focus-visible {
+    outline: none;
+    border-color: var(--color-default-400, #a1a1aa);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-default-400, #a1a1aa) 30%, transparent);
+  }
+
+  .form-input:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .form-input[readonly] {
+    background-color: color-mix(in oklab, var(--color-default-100) 80%, transparent);
+    color: color-mix(in oklab, var(--color-default-600) 80%, transparent);
+    cursor: not-allowed;
+  }
+
+  .form-input[aria-invalid="true"] {
+    border-color: color-mix(in oklab, var(--color-danger) 60%, transparent);
+  }
+
+  .form-input[aria-invalid="true"]:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-danger) 10%, transparent);
+  }
+
+  .form-input-sm {
+    height: 1.875rem; /* h-7.5 */
+    font-size: 0.75rem;
+  }
+
+  .form-input-lg {
+    height: 2.75rem; /* h-11 */
+    font-size: 1rem;
+  }
+
+  textarea.form-input {
+    height: auto !important;
+    padding: 0.75rem;
+    min-height: 5rem;
+  }
+
+  select.form-input {
+    min-width: 7rem;
+  }
+
+  /* MDropdown DefaultSelectTrigger — button gắn class form-input cần flex layout. */
+  button.form-input,
+  .form-input[data-select-trigger] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    text-align: start;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-default-700);
+    margin-bottom: 0.375rem;
+  }
+
+  .form-hint {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--color-default-500);
+  }
+
+  .form-error {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--color-danger);
+  }
+
+  /* Checkbox / Radio — dùng nhiều variant/state → @apply gọn hơn viết tay. */
+  .form-radio,
+  .form-checkbox {
+    @apply appearance-none bg-no-repeat bg-center;
+    @apply shrink-0 border ring-offset-white focus-visible:outline-none;
+    @apply focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-1;
+    @apply disabled:cursor-not-allowed disabled:opacity-70;
+    @apply cursor-pointer size-4.5;
+    border-color: var(--color-default-400, #a1a1aa);
+    background-color: transparent;
+    transition: background-color 150ms, border-color 150ms;
+  }
+
+  .form-checkbox {
+    border-radius: 0.25rem;
+  }
+
+  .form-radio {
+    border-radius: 9999px;
+  }
+
+  .form-checkbox:checked,
+  .form-radio:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .form-checkbox:checked {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'><path fill-rule='evenodd' d='M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z' clip-rule='evenodd'/></svg>");
+    background-size: 90%;
+  }
+
+  .form-radio:checked {
+    background-image: radial-gradient(circle, white 40%, transparent 45%);
+  }
+
+  /* Switch */
+  .form-switch {
+    display: inline-flex;
+    position: relative;
+    flex-shrink: 0;
+    width: 1.875rem; /* w-7.5 */
+    height: 1.25rem; /* h-5 */
+    border-radius: 9999px;
+    background-color: var(--color-default-300, #d4d4d8);
+    border: 0;
+    cursor: pointer;
+    appearance: none;
+    transition: background-color 150ms;
+  }
+
+  .form-switch::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    inset-inline-start: 0;
+    width: 0.75rem; /* size-3 */
+    height: 0.75rem;
+    border-radius: 9999px;
+    background-color: white;
+    transform: translate(0.25rem, -50%);
+    transition: transform 150ms;
+    pointer-events: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-switch:checked,
+  .form-switch[aria-checked="true"] {
+    background-color: var(--color-primary);
+  }
+
+  .form-switch:checked::before,
+  .form-switch[aria-checked="true"]::before {
+    transform: translate(0.875rem, -50%);
+  }
+
+  .form-switch:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .form-switch:focus-visible {
+    outline: 2px solid var(--color-default-400, #a1a1aa);
+    outline-offset: 2px;
+  }
+}

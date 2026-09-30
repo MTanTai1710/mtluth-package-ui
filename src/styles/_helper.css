@@ -1,0 +1,5 @@
+/* Utility helpers — chỗ đặt các custom bổ sung cho atomic components. */
+
+.hs-overlay-backdrop {
+  @apply !bg-default-900/20;
+}

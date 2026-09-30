@@ -1,0 +1,52 @@
+@layer components {
+  .alert {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid transparent;
+    font-size: 0.875rem;
+  }
+
+  .alert .alert-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .alert .alert-close {
+    margin-inline-start: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.25rem;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 120ms;
+  }
+
+  .alert .alert-close:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  /* Soft variants — bg 10%, text màu đậm, border 20%. */
+  .alert-primary   { background-color: color-mix(in oklab, var(--color-primary)   10%, transparent); color: var(--color-primary);   border-color: color-mix(in oklab, var(--color-primary)   20%, transparent); }
+  .alert-secondary { background-color: color-mix(in oklab, var(--color-secondary) 10%, transparent); color: var(--color-secondary); border-color: color-mix(in oklab, var(--color-secondary) 20%, transparent); }
+  .alert-success   { background-color: color-mix(in oklab, var(--color-success)   10%, transparent); color: var(--color-success);   border-color: color-mix(in oklab, var(--color-success)   20%, transparent); }
+  .alert-info      { background-color: color-mix(in oklab, var(--color-info)      10%, transparent); color: var(--color-info);      border-color: color-mix(in oklab, var(--color-info)      20%, transparent); }
+  .alert-warning   { background-color: color-mix(in oklab, var(--color-warning)   10%, transparent); color: var(--color-warning);   border-color: color-mix(in oklab, var(--color-warning)   20%, transparent); }
+  .alert-danger    { background-color: color-mix(in oklab, var(--color-danger)    10%, transparent); color: var(--color-danger);    border-color: color-mix(in oklab, var(--color-danger)    20%, transparent); }
+
+  /* Solid variants. */
+  .alert-solid-primary   { background-color: var(--color-primary);   color: #fff; border-color: var(--color-primary); }
+  .alert-solid-secondary { background-color: var(--color-secondary); color: #fff; border-color: var(--color-secondary); }
+  .alert-solid-success   { background-color: var(--color-success);   color: #fff; border-color: var(--color-success); }
+  .alert-solid-info      { background-color: var(--color-info);      color: #fff; border-color: var(--color-info); }
+  .alert-solid-warning   { background-color: var(--color-warning);   color: #fff; border-color: var(--color-warning); }
+  .alert-solid-danger    { background-color: var(--color-danger);    color: #fff; border-color: var(--color-danger); }
+}

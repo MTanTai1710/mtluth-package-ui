@@ -1,0 +1,20 @@
+@layer base {
+  html {
+    @apply scroll-smooth relative;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+    @apply font-semibold;
+  }
+
+  body {
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+    @apply antialiased font-body font-normal text-sm leading-normal bg-body-bg text-body-color;
+  }
+}
+
+input, textarea, button, select, a {
+  -webkit-tap-highlight-color: transparent;
+}
