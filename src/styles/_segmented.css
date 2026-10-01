@@ -1,0 +1,62 @@
+@layer components {
+  .m-segmented {
+    display: inline-flex;
+    align-items: stretch;
+    border: 1px solid var(--color-default-300, #d4d4d8);
+    border-radius: 0.375rem;
+    background-color: var(--color-card, #fff);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .m-segmented-full {
+    display: flex;
+    width: 100%;
+  }
+
+  .m-segmented-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    color: var(--color-default-700, #3f3f46);
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 120ms, color 120ms;
+    position: relative;
+  }
+
+  .m-segmented-full .m-segmented-item {
+    flex: 1 1 0;
+  }
+
+  /* Đường ngăn giữa các item — dùng border-left, item đầu không có. */
+  .m-segmented-item + .m-segmented-item {
+    border-left: 1px solid var(--color-default-300, #d4d4d8);
+  }
+
+  .m-segmented-item:hover:not(.is-active):not(.is-disabled) {
+    background-color: var(--color-default-100, #f4f4f5);
+    color: var(--color-default-900, #18181b);
+  }
+
+  .m-segmented-item.is-active {
+    background-color: var(--m-seg-active-bg, var(--color-primary, #3b82f6));
+    color: #fff;
+    /* Che border-left của chính nó bằng cách override — item active không
+     * cần đường ngăn với item bên trái vì nền màu đã tách rõ. */
+    border-left-color: transparent;
+  }
+
+  /* Nếu item active có item bên phải, giấu luôn border-left của item phải. */
+  .m-segmented-item.is-active + .m-segmented-item {
+    border-left-color: transparent;
+  }
+
+  .m-segmented-item.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

@@ -95,6 +95,7 @@ Xem file source (`src/components/M*.jsx`) — mỗi component có prop docs tron
 | `MAlert` | `variant`, `fill`, `title`, `icon`, `dismissible`, `onClose` |
 | `MDropdown` + `.Item/.Divider/.Header` | **Action menu**: `trigger`, `align`, `placement`, children `<MDropdown.Item>`.<br>**Select mode** (thay native `<select>`): `items` (`[{value,label,disabled?}]`), `value`, `onChange`, `searchable`, `placeholder`, `label`, `hint`, `error`. Bàn phím ↑↓ + Enter + Esc. |
 | `MModal` + `.Header/.Body/.Footer` | `open`, `onClose`, `size`, `title`, `footer`, `dismissable` |
+| `MSegmented` | Segmented control (AND/OR, List/Grid/Kanban, ...): `options` (`[{value,label,icon?,disabled?}]`), `value`, `onChange`, `size`, `variant`, `fullWidth`, `label`, `hint` |
 
 ## Design tokens
 

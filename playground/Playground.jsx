@@ -12,6 +12,7 @@ import {
   MAlert,
   MDropdown,
   MModal,
+  MSegmented,
 } from "../src/index.js";
 
 /*
@@ -27,6 +28,8 @@ export function Playground() {
   const [checked, setChecked] = useState(false);
   const [role, setRole] = useState("admin");
   const [country, setCountry] = useState("");
+  const [logic, setLogic] = useState("and");
+  const [view, setView] = useState("list");
 
   const COUNTRIES = [
     { value: "vn", label: "Việt Nam" },
@@ -145,6 +148,52 @@ export function Playground() {
                 checked={switchOn}
                 onChange={(e) => setSwitchOn(e.target.checked)}
               />
+            </div>
+          </div>
+        </MCard>
+
+        <MCard title="Segmented control">
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <span className="text-sm text-default-600 w-24">Logic:</span>
+              <MSegmented
+                value={logic}
+                onChange={setLogic}
+                options={[
+                  { value: "and", label: "AND" },
+                  { value: "or", label: "OR" },
+                ]}
+              />
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="text-sm text-default-600 w-24">View:</span>
+              <MSegmented
+                size="sm"
+                value={view}
+                onChange={setView}
+                options={[
+                  { value: "list", label: "List" },
+                  { value: "grid", label: "Grid" },
+                  { value: "kanban", label: "Kanban" },
+                  { value: "calendar", label: "Calendar", disabled: true },
+                ]}
+              />
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="text-sm text-default-600 w-24">Full width:</span>
+              <div className="flex-1">
+                <MSegmented
+                  fullWidth
+                  variant="success"
+                  value={view}
+                  onChange={setView}
+                  options={[
+                    { value: "list", label: "List" },
+                    { value: "grid", label: "Grid" },
+                    { value: "kanban", label: "Kanban" },
+                  ]}
+                />
+              </div>
             </div>
           </div>
         </MCard>
