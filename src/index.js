@@ -23,6 +23,10 @@ export { MBadge } from "./components/MBadge.jsx";
 export { MAlert } from "./components/MAlert.jsx";
 export { MDropdown } from "./components/MDropdown.jsx";
 export { MModal } from "./components/MModal.jsx";
+export {
+  MModalConfirm,
+  useMModalConfirm,
+} from "./components/MModalConfirm.jsx";
 export { MSegmented } from "./components/MSegmented.jsx";
 
 export { cn } from "./utils/cn.js";
