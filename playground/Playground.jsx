@@ -13,6 +13,8 @@ import {
   MDropdown,
   MModal,
   MSegmented,
+  MPagination,
+  useMPagination,
 } from "../src/index.js";
 
 /*
@@ -30,6 +32,18 @@ export function Playground() {
   const [country, setCountry] = useState("");
   const [logic, setLogic] = useState("and");
   const [view, setView] = useState("list");
+
+  // Fake dataset cho MPagination demo (23 items → 3 trang nếu size=10).
+  const PAGINATION_DATA = React.useMemo(
+    () =>
+      Array.from({ length: 23 }, (_, i) => ({
+        id: i + 1,
+        name: `Item #${String(i + 1).padStart(2, "0")}`,
+      })),
+    [],
+  );
+  const pager = useMPagination(PAGINATION_DATA, 10);
+  const [controlledPage, setControlledPage] = useState(1);
 
   const COUNTRIES = [
     { value: "vn", label: "Việt Nam" },
@@ -236,6 +250,46 @@ export function Playground() {
               hint="Gõ để lọc — ↑↓ + Enter để chọn"
             />
           </div>
+        </MCard>
+
+        <MCard title="Pagination (useMPagination + MPagination)">
+          <div className="rounded-lg border border-default-200 bg-card overflow-hidden">
+            <table className="min-w-full divide-y divide-default-200">
+              <thead className="bg-default-150">
+                <tr className="text-sm font-normal text-default-700">
+                  <th className="px-3.5 py-3 text-start w-16">#</th>
+                  <th className="px-3.5 py-3 text-start">Name</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-default-200">
+                {pager.pageItems.map((it) => (
+                  <tr key={it.id} className="text-default-800 text-sm">
+                    <td className="px-3.5 py-2 font-mono">{it.id}</td>
+                    <td className="px-3.5 py-2">{it.name}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="border-t border-default-200">
+              <MPagination
+                page={pager.page}
+                pageCount={pager.pageCount}
+                pageSize={pager.pageSize}
+                total={pager.total}
+                onPageChange={pager.setPage}
+              />
+            </div>
+          </div>
+
+          <div className="mt-4 text-xs text-default-500">
+            Controlled (dataset lớn, 42 trang — demo ellipsis):
+          </div>
+          <MPagination
+            page={controlledPage}
+            pageSize={10}
+            total={420}
+            onPageChange={setControlledPage}
+          />
         </MCard>
 
         <MModal

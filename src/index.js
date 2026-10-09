@@ -33,5 +33,6 @@ export {
   useMToast,
 } from "./components/MToast.jsx";
 export { MSegmented } from "./components/MSegmented.jsx";
+export { MPagination, useMPagination } from "./components/MPagination.jsx";
 
 export { cn } from "./utils/cn.js";

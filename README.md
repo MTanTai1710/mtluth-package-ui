@@ -96,6 +96,7 @@ Xem file source (`src/components/M*.jsx`) — mỗi component có prop docs tron
 | `MDropdown` + `.Item/.Divider/.Header` | **Action menu**: `trigger`, `align`, `placement`, children `<MDropdown.Item>`.<br>**Select mode** (thay native `<select>`): `items` (`[{value,label,disabled?}]`), `value`, `onChange`, `searchable`, `placeholder`, `label`, `hint`, `error`. Bàn phím ↑↓ + Enter + Esc. |
 | `MModal` + `.Header/.Body/.Footer` | `open`, `onClose`, `size`, `title`, `footer`, `dismissable` |
 | `MSegmented` | Segmented control (AND/OR, List/Grid/Kanban, ...): `options` (`[{value,label,icon?,disabled?}]`), `value`, `onChange`, `size`, `variant`, `fullWidth`, `label`, `hint` |
+| `MPagination` + `useMPagination` | Pagination (pattern Tailwick): `page`, `pageSize`, `total`, `pageCount?`, `onPageChange`, `siblings=1`, `showSummary=true`, `labels`. Dùng cùng hook `useMPagination(items, 10)` để slice client-side (`→ {page, setPage, pageSize, pageCount, total, pageItems}`). |
 
 ## Design tokens
 
