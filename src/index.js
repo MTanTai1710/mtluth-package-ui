@@ -34,5 +34,10 @@ export {
 } from "./components/MToast.jsx";
 export { MSegmented } from "./components/MSegmented.jsx";
 export { MPagination, useMPagination } from "./components/MPagination.jsx";
+export { MNotionEditor } from "./components/MNotionEditor.jsx";
+export {
+  createSlashCommandExtension,
+  defaultSlashItems,
+} from "./components/MNotionEditor.slash.jsx";
 
 export { cn } from "./utils/cn.js";

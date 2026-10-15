@@ -1,0 +1,288 @@
+/*
+ * MNotionEditor — minimal Notion-like editor styles.
+ *
+ * Scope: ProseMirror vùng edit + toolbar + bubble + slash popup.
+ * Tokens: dùng var(--color-default-*) + var(--color-primary) để auto theme.
+ */
+
+.m-notion {
+  position: relative;
+  border: 1px solid var(--color-default-200);
+  border-radius: 8px;
+  background: var(--color-card);
+  color: var(--color-default-800);
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+
+.m-notion--readonly {
+  background: var(--color-default-50);
+}
+
+.m-notion__toolbar {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--color-default-200);
+  background: var(--color-default-50);
+}
+
+.m-notion__content {
+  padding: 12px 16px;
+  overflow-y: auto;
+  min-height: var(--m-notion-min-h, 180px);
+}
+
+.m-notion[style*="--m-notion-max-h"] .m-notion__content {
+  max-height: var(--m-notion-max-h);
+}
+
+/* ProseMirror editable surface */
+.m-notion .ProseMirror {
+  outline: none;
+  min-height: calc(var(--m-notion-min-h, 180px) - 24px);
+  line-height: 1.6;
+  color: inherit;
+}
+
+.m-notion .ProseMirror > * + * {
+  margin-top: 0.6em;
+}
+
+.m-notion .ProseMirror p {
+  margin: 0;
+}
+
+.m-notion .ProseMirror h1,
+.m-notion .ProseMirror h2,
+.m-notion .ProseMirror h3 {
+  font-weight: 700;
+  color: var(--color-default-900);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.m-notion .ProseMirror h1 { font-size: 1.75rem; }
+.m-notion .ProseMirror h2 { font-size: 1.4rem; }
+.m-notion .ProseMirror h3 { font-size: 1.15rem; }
+
+.m-notion .ProseMirror ul,
+.m-notion .ProseMirror ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.m-notion .ProseMirror ul { list-style: disc; }
+.m-notion .ProseMirror ol { list-style: decimal; }
+
+.m-notion .ProseMirror li > p {
+  margin: 0;
+}
+
+.m-notion .ProseMirror blockquote {
+  margin: 0;
+  padding: 0.25rem 1rem;
+  border-left: 3px solid var(--color-default-300);
+  color: var(--color-default-600);
+  font-style: italic;
+}
+
+.m-notion .ProseMirror hr {
+  border: 0;
+  border-top: 1px solid var(--color-default-200);
+  margin: 1rem 0;
+}
+
+.m-notion .ProseMirror code {
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--color-default-100);
+  color: var(--color-default-900);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+
+.m-notion .ProseMirror pre {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background: var(--color-default-900);
+  color: var(--color-default-50);
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.m-notion .ProseMirror pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.m-notion .ProseMirror a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+/* Placeholder — Tiptap Placeholder extension gắn class is-editor-empty
+   cho first node rỗng (hoặc is-empty cho mọi node rỗng tuỳ config). */
+.m-notion .ProseMirror p.is-editor-empty:first-child::before,
+.m-notion .ProseMirror .is-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--color-default-400);
+  pointer-events: none;
+  height: 0;
+}
+
+/* ====== Toolbar (fixed + bubble) ====== */
+
+.m-notion-tbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.m-notion-tbar__divider {
+  width: 1px;
+  height: 18px;
+  background: var(--color-default-300);
+  margin: 0 4px;
+}
+
+.m-notion-tbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  min-width: 28px;
+  padding: 0 6px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-default-700);
+  cursor: pointer;
+  transition: background-color 0.12s, color 0.12s;
+}
+
+.m-notion-tbtn:hover:not(:disabled) {
+  background: var(--color-default-150);
+  color: var(--color-default-900);
+}
+
+.m-notion-tbtn.is-active {
+  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  color: var(--color-primary);
+}
+
+.m-notion-tbtn:disabled,
+.m-notion-tbtn.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.m-notion-tbtn__text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* ====== Bubble menu ====== */
+
+.m-notion-bubble {
+  display: inline-flex;
+  padding: 4px;
+  background: var(--color-card);
+  border: 1px solid var(--color-default-200);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.12),
+    0 2px 4px -2px rgba(0, 0, 0, 0.06);
+}
+
+/* ====== Slash popup ====== */
+
+.m-notion-slash-portal {
+  pointer-events: auto;
+}
+
+.m-notion-slash {
+  width: 260px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 4px;
+  background: var(--color-card);
+  border: 1px solid var(--color-default-200);
+  border-radius: 8px;
+  box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.18),
+    0 4px 10px -4px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-body);
+}
+
+.m-notion-slash--empty {
+  padding: 12px;
+  text-align: center;
+  color: var(--color-default-500);
+  font-size: 0.875rem;
+}
+
+.m-notion-slash__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-default-800);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.08s;
+}
+
+.m-notion-slash__item:hover,
+.m-notion-slash__item.is-selected {
+  background: var(--color-default-100);
+}
+
+.m-notion-slash__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-default-200);
+  border-radius: 6px;
+  background: var(--color-default-50);
+  color: var(--color-default-700);
+  flex: 0 0 32px;
+}
+
+.m-notion-slash__text-icon {
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.m-notion-slash__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.m-notion-slash__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-default-900);
+  line-height: 1.2;
+}
+
+.m-notion-slash__subtitle {
+  font-size: 0.75rem;
+  color: var(--color-default-500);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

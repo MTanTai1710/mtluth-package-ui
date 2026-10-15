@@ -15,6 +15,7 @@ import {
   MSegmented,
   MPagination,
   useMPagination,
+  MNotionEditor,
 } from "../src/index.js";
 
 /*
@@ -44,6 +45,9 @@ export function Playground() {
   );
   const pager = useMPagination(PAGINATION_DATA, 10);
   const [controlledPage, setControlledPage] = useState(1);
+  const [notionHtml, setNotionHtml] = useState(
+    "<h2>Hello MNotionEditor</h2><p>Thử gõ <code>/</code> để mở slash menu.</p><ul><li><p>Select text → bubble menu</p></li><li><p>Hỗ trợ bold, italic, underline, link</p></li></ul>",
+  );
 
   const COUNTRIES = [
     { value: "vn", label: "Việt Nam" },
@@ -290,6 +294,27 @@ export function Playground() {
             total={420}
             onPageChange={setControlledPage}
           />
+        </MCard>
+
+        <MCard title="MNotionEditor (Tiptap)">
+          <div className="text-xs text-default-500 mb-2">
+            Gõ <code>/</code> để mở slash menu — select text để hiện bubble toolbar.
+          </div>
+          <MNotionEditor
+            value={notionHtml}
+            onChange={(html) => setNotionHtml(html)}
+            showToolbar
+            minHeight={220}
+            maxHeight={420}
+          />
+          <details className="mt-3 text-xs">
+            <summary className="cursor-pointer text-default-500">
+              HTML output
+            </summary>
+            <pre className="mt-2 p-2 rounded bg-default-100 overflow-x-auto whitespace-pre-wrap text-default-700">
+              {notionHtml}
+            </pre>
+          </details>
         </MCard>
 
         <MModal
